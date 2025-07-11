@@ -22,3 +22,4 @@ Still in development stage, welcome to submit issues or feature requests.
 - vote for Tag, watch and hidden tags
 - comment, vote for comment
 - Fingerprint unlock (Removed in F-Droid builds due to non-free dependencies)
+- ...
