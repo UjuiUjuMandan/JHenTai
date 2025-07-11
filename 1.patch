@@ -1,0 +1,115 @@
+diff --git a/lib/src/pages/lock_page.dart b/lib/src/pages/lock_page.dart
+index 4cb966d4..6e4693c9 100644
+--- a/lib/src/pages/lock_page.dart
++++ b/lib/src/pages/lock_page.dart
+@@ -50,47 +49,4 @@ class _LockPageState extends State<LockPage> with WindowListener, WindowWidgetMi
+                 if (securitySetting.enablePasswordAuth.isTrue)
+-                  Pinput(
+-                    length: 4,
+-                    controller: controller,
+-                    pinAnimationType: PinAnimationType.fade,
+-                    obscureText: true,
+-                    preFilledWidget: Column(
+-                      mainAxisAlignment: MainAxisAlignment.end,
+-                      children: [
+-                        Container(
+-                          width: UIConfig.lockPagePinCodeRegionWidth,
+-                          height: UIConfig.lockPageCursorHeight,
+-                          color: UIConfig.lockPageFilledDashColor(context),
+-                        )
+-                      ],
+-                    ),
+-                    cursor: Column(
+-                      mainAxisAlignment: MainAxisAlignment.end,
+-                      children: [
+-                        Container(
+-                          width: UIConfig.lockPagePinCodeRegionWidth,
+-                          height: UIConfig.lockPageCursorHeight,
+-                          color: UIConfig.lockPageUnfilledDashColor(context),
+-                        )
+-                      ],
+-                    ),
+-                    defaultPinTheme: const PinTheme(
+-                      width: UIConfig.lockPagePinCodeRegionWidth,
+-                      height: UIConfig.lockPagePinCodeRegionWidth,
+-                      textStyle: TextStyle(fontSize: 24),
+-                    ),
+-                    onCompleted: (String value) {
+-                      if (keyToMd5(value) != securitySetting.encryptedPassword.value) {
+-                        setState(() {
+-                          controller.clear();
+-                          hintText = 'passwordErrorHint'.tr;
+-                        });
+-                        return;
+-                      }
+-
+-                      unlock();
+-                    },
+-                    closeKeyboardWhenCompleted: false,
+-                  ),
+                 Container(
+                   padding: const EdgeInsets.only(top: 32),
+                   alignment: Alignment.center,
+diff --git a/lib/src/widget/eh_app_password_setting_dialog.dart b/lib/src/widget/eh_app_password_setting_dialog.dart
+index 40a31469..661f0d3d 100644
+--- a/lib/src/widget/eh_app_password_setting_dialog.dart
++++ b/lib/src/widget/eh_app_password_setting_dialog.dart
+@@ -36,58 +35,6 @@ class _EHAppPasswordSettingDialogState extends State<EHAppPasswordSettingDialog>
+         SizedBox(
+           height: UIConfig.authDialogPinHeight,
+           width: UIConfig.authDialogPinWidth,
+-          child: Pinput(
+-            length: 4,
+-            controller: controller,
+-            pinAnimationType: PinAnimationType.fade,
+-            obscureText: true,
+-            autofocus: true,
+-            preFilledWidget: Column(
+-              mainAxisAlignment: MainAxisAlignment.end,
+-              children: [
+-                Container(
+-                  width: UIConfig.authDialogPinCodeRegionWidth,
+-                  height: UIConfig.authDialogCursorHeight,
+-                  color: UIConfig.lockPageFilledDashColor(context),
+-                )
+-              ],
+-            ),
+-            cursor: Column(
+-              mainAxisAlignment: MainAxisAlignment.end,
+-              children: [
+-                Container(
+-                  width: UIConfig.authDialogPinCodeRegionWidth,
+-                  height: UIConfig.authDialogCursorHeight,
+-                  color: UIConfig.lockPageUnfilledDashColor(context),
+-                )
+-              ],
+-            ),
+-            defaultPinTheme: const PinTheme(
+-              width: UIConfig.authDialogPinCodeRegionWidth,
+-              height: UIConfig.authDialogPinCodeRegionWidth,
+-              textStyle: TextStyle(fontSize: 24),
+-            ),
+-            onCompleted: (String value) {
+-              if (firstPassword == null) {
+-                setState(() {
+-                  firstPassword = value;
+-                  hintText = 'confirmPasswordHint'.tr;
+-                  controller.clear();
+-                });
+-              } else {
+-                if (firstPassword == value) {
+-                  Get.back(result: value);
+-                } else {
+-                  setState(() {
+-                    firstPassword = null;
+-                    hintText = 'passwordNotMatchHint'.tr;
+-                    controller.clear();
+-                  });
+-                }
+-              }
+-            },
+-            closeKeyboardWhenCompleted: false,
+-          ),
+         ),
+         Container(
+           padding: const EdgeInsets.only(bottom: 4),
